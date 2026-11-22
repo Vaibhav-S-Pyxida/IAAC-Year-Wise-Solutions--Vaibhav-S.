@@ -1,0 +1,567 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[a4paper, margin=2.2cm, top=2.6cm, bottom=2.2cm, headheight=22pt]{geometry}
+\usepackage{fontspec}
+\usepackage[english, bidi=basic, provide=*]{babel}
+\babelprovide[import, onchar=ids fonts]{english}
+\babelfont{rm}{Noto Sans}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{hyperref}
+
+\definecolor{iaacblack}{RGB}{20, 20, 20}
+\definecolor{iaacgray}{RGB}{90, 90, 90}
+\definecolor{iaaclight}{RGB}{246, 246, 246}
+\definecolor{iaacrule}{RGB}{200, 200, 200}
+\definecolor{navyaccent}{RGB}{22, 38, 68}
+\definecolor{navytint}{RGB}{244, 246, 250}
+\definecolor{goldaccent}{RGB}{185, 138, 28}
+\definecolor{sunyellow}{RGB}{235, 195, 25}
+\definecolor{earthgreen}{RGB}{170, 225, 195}
+\definecolor{bloodred}{RGB}{165, 45, 30}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyaccent,
+    urlcolor=iaacgray
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{iaacrule}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\footnotesize\bfseries\color{iaacgray} IAAC 2027 -- QUALIFICATION ROUND}
+\fancyhead[R]{\footnotesize\color{iaacgray} Vaibhav S.}
+\fancyfoot[L]{\small\color{iaacgray} www.iaac.space}
+\fancyfoot[C]{\small\color{iaacgray} by Vaibhav S.}
+\fancyfoot[R]{\small\bfseries\color{navyaccent} \thepage}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\newcommand{\problemheader}[2]{%
+    \par\noindent{\footnotesize\bfseries\color{goldaccent} \MakeUppercase{#1}}\par
+    \vspace{2pt}
+    \noindent\begin{tabularx}{\textwidth}{@{}X r@{}}
+        {\fontsize{18}{22}\selectfont\bfseries\color{navyaccent} #1} & {\normalsize\normalfont\color{iaacgray} (#2)}
+    \end{tabularx}\par
+    \vspace{4pt}
+    {\color{navyaccent}\hrule height 1.1pt}
+    \vspace{10pt}
+}
+
+\newcommand{\questionbox}[1]{%
+    \par\noindent\begin{tabular}{@{}!{\color{navyaccent}\vrule width 2.5pt}@{\hspace{10pt}}p{\dimexpr\textwidth-12.5pt\relax}@{}}
+        \normalsize\color{iaacblack}#1
+    \end{tabular}\par
+    \vspace{10pt}
+}
+
+\newcommand{\answerbox}[2]{%
+    \par\vspace{6pt}
+    \noindent\fcolorbox{navyaccent}{navytint}{%
+        \parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+            {\footnotesize\bfseries\color{goldaccent} \MakeUppercase{#1}}\par\vspace{3pt}
+            \normalsize\color{navyaccent}#2%
+        }%
+    }\par
+    \vspace{6pt}
+}
+
+\newcommand{\subquestion}[1]{%
+    \vspace{14pt}
+    \noindent\textbf{\large\color{navyaccent}#1}
+    \vspace{4pt}
+}
+
+\newcommand{\gfsblock}[3]{%
+    \begin{description}[leftmargin=2.1cm, labelwidth=1.9cm, labelsep=0.2cm, itemsep=5pt, topsep=3pt, parsep=3pt, align=left]
+        \item[\textbf{\color{navyaccent}Given:}] #1
+        \item[\textbf{\color{navyaccent}Formula:}] #2
+        \item[\textbf{\color{navyaccent}Solution:}] #3
+    \end{description}
+    \vspace{8pt}
+}
+
+\begin{document}
+
+% ==================== COVER PAGE ====================
+\begin{titlepage}
+    \pagenumbering{roman}
+    \thispagestyle{empty}
+    \begin{tikzpicture}[remember picture, overlay]
+        % Subtle background typography of iconic astronomy & astrophysics equations
+        \node[text=navyaccent!11, font=\Large\bfseries, rotate=-8] at ([xshift=3.8cm, yshift=-2.3cm]current page.north west) {$T^2 = \dfrac{4\pi^2}{GM}a^3$};
+        \node[text=goldaccent!22, font=\large\bfseries, rotate=11] at ([xshift=-4.2cm, yshift=-2.1cm]current page.north east) {$m - M = 5\log_{10}\!\left(\dfrac{d}{10\text{ pc}}\right)$};
+        \node[text=navyaccent!10, font=\large\bfseries, rotate=6] at ([xshift=3.5cm, yshift=-5.6cm]current page.north west) {$R_s = \dfrac{2GM}{c^2}$};
+        \node[text=navyaccent!10, font=\large\bfseries, rotate=-12] at ([xshift=-3.6cm, yshift=-6.4cm]current page.north east) {$L = 4\pi R^2 \sigma T^4$};
+        \node[text=goldaccent!18, font=\normalsize\bfseries, rotate=-6] at ([xshift=3.3cm, yshift=-10.2cm]current page.north west) {$\lambda_{\max} T = b$};
+        \node[text=navyaccent!10, font=\normalsize\bfseries, rotate=9] at ([xshift=-3.4cm, yshift=-10.8cm]current page.north east) {$v = H_0 d$};
+        \node[text=navyaccent!10, font=\large\bfseries, rotate=7] at ([xshift=4.0cm, yshift=5.6cm]current page.south west) {$\nabla^2 \Phi = 4\pi G \rho$};
+        \node[text=goldaccent!20, font=\large\bfseries, rotate=-9] at ([xshift=-4.1cm, yshift=5.8cm]current page.south east) {$\dfrac{F_1}{F_2} = 10^{0.4(m_2 - m_1)}$};
+        \node[text=navyaccent!11, font=\large\bfseries, rotate=-5] at ([xshift=4.4cm, yshift=1.9cm]current page.south west) {$I_{\text{scat}} \propto \lambda^{-4}$};
+        \node[text=navyaccent!11, font=\large\bfseries, rotate=8] at ([xshift=-4.4cm, yshift=2.0cm]current page.south east) {$E = h\nu = \dfrac{hc}{\lambda}$};
+
+        % Subtle geometric constellation / orbital reference lines at corners
+        \draw[goldaccent!35, line width=0.8pt] ([xshift=1.4cm, yshift=-1.4cm]current page.north west) -- ([xshift=3.2cm, yshift=-1.4cm]current page.north west);
+        \draw[goldaccent!35, line width=0.8pt] ([xshift=1.4cm, yshift=-1.4cm]current page.north west) -- ([xshift=1.4cm, yshift=-3.2cm]current page.north west);
+        \draw[goldaccent!35, line width=0.8pt] ([xshift=-1.4cm, yshift=1.4cm]current page.south east) -- ([xshift=-3.2cm, yshift=1.4cm]current page.south east);
+        \draw[goldaccent!35, line width=0.8pt] ([xshift=-1.4cm, yshift=1.4cm]current page.south east) -- ([xshift=-1.4cm, yshift=3.2cm]current page.south east);
+    \end{tikzpicture}
+
+    \vspace*{0.4cm}
+
+    % Preserved IAAC orbital arcs and telescope hexagon emblem
+    \noindent\begin{tikzpicture}[x=1cm, y=1cm]
+        \foreach \i in {0,1,2,3,4,5,6} {
+            \draw[navyaccent!45, line width=0.6pt]
+                (0, 0.3 + 0.14*\i) .. controls (8.5, 0.5 + 0.25*\i) and (13.5, 2.2 + 0.15*\i) .. (14.2 - 0.28*\i, 6.2);
+        }
+        \begin{scope}[shift={(12.8, 2.1)}]
+            \fill[white] (0:1.75) -- (60:1.75) -- (120:1.75) -- (180:1.75) -- (240:1.75) -- (300:1.75) -- cycle;
+            \draw[navyaccent, line width=2.6pt, line join=round]
+                (0:1.75) -- (60:1.75) -- (120:1.75) -- (180:1.75) -- (240:1.75) -- (300:1.75) -- cycle;
+            % Telescope tube
+            \fill[navyaccent, rotate=20] (-0.95, 0.08) rectangle (0.95, 0.42);
+            % Tripod legs
+            \draw[navyaccent, line width=2.2pt, line cap=round] (0, 0.12) -- (-0.65, -1.15);
+            \draw[navyaccent, line width=2.2pt, line cap=round] (0, 0.12) -- (0, -1.15);
+            \draw[navyaccent, line width=2.2pt, line cap=round] (0, 0.12) -- (0.65, -1.15);
+            % Stars & crescent
+            \fill[goldaccent] (-0.65, 0.95) -- (-0.58, 1.12) -- (-0.42, 1.18) -- (-0.58, 1.24) -- (-0.65, 1.41) -- (-0.72, 1.24) -- (-0.88, 1.18) -- (-0.72, 1.12) -- cycle;
+            \fill[goldaccent] (-0.32, 0.58) -- (-0.27, 0.70) -- (-0.15, 0.75) -- (-0.27, 0.80) -- (-0.32, 0.92) -- (-0.37, 0.80) -- (-0.49, 0.75) -- (-0.37, 0.70) -- cycle;
+            \fill[navyaccent] (0.12, 1.05) circle (0.28);
+            \fill[white] (0.24, 1.08) circle (0.24);
+        \end{scope}
+    \end{tikzpicture}
+
+    \vspace{0.9cm}
+
+    \begin{center}
+        {\small\bfseries\color{goldaccent} \MakeUppercase{International Astronomy \& Astrophysics Competition}\par}
+        \vspace{6pt}
+        {\fontsize{25}{31}\selectfont\bfseries\color{navyaccent}
+        International Astronomy and\\[4pt]
+        Astrophysics Competition\par}
+
+        \vspace{8pt}
+        {\fontsize{16}{20}\selectfont\color{iaacgray}
+        Qualification Round \textbullet\ Edition of 2027\par}
+
+        \vspace{16pt}
+        {\color{goldaccent}\rule{4.5cm}{1.6pt}}
+        \vspace{16pt}
+
+        {\LARGE\bfseries\color{navyaccent} Complete Written Solutions\par}
+        \vspace{8pt}
+        {\large\bfseries\color{iaacgray} Submission by Vaibhav S.\par}
+    \end{center}
+
+    \vfill
+
+    % Structured metadata panel inspired by the second attached paper
+    \noindent\fcolorbox{navyaccent}{navytint}{%
+        \parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+            \vspace{4pt}
+            \begin{tabularx}{\linewidth}{@{}lX lX@{}}
+                {\footnotesize\bfseries\color{goldaccent} PARTICIPANT} & \textbf{\color{navyaccent} Vaibhav S.} &
+                {\footnotesize\bfseries\color{goldaccent} EDITION} & \textbf{\color{navyaccent} 2027 Qualification Round} \\[6pt]
+                {\footnotesize\bfseries\color{goldaccent} COMPETITION} & \color{iaacblack} IAAC (\texttt{www.iaac.space}) &
+                {\footnotesize\bfseries\color{goldaccent} PROBLEM SET} & \color{iaacblack} Problems A--E (25 Points) \\
+            \end{tabularx}
+            \vspace{4pt}
+        }%
+    }
+
+    \vspace{0.8cm}
+\end{titlepage}
+
+% ==================== INDEX PAGE ====================
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\noindent{\footnotesize\bfseries\color{goldaccent} CONTENTS \& REFERENCE}\par
+\vspace{2pt}
+\noindent{\fontsize{18}{22}\selectfont\bfseries\color{navyaccent} Index}\par
+\vspace{4pt}
+{\color{navyaccent}\hrule height 1.1pt}
+\vspace{12pt}
+
+\noindent\begin{tabularx}{\textwidth}{@{}p{2.3cm}Xp{1.8cm}p{1.2cm}@{}}
+    \toprule
+    \textbf{Problem} & \textbf{Title \& Topic} & \textbf{Points} & \textbf{Page} \\
+    \midrule
+    \hyperref[sec:probA]{\textbf{Problem A}} & \hyperref[sec:probA]{Moons of the Solar System (Planetary Science)} & 5 Points & \pageref{sec:probA} \\[6pt]
+    \hyperref[sec:probB]{\textbf{Problem B}} & \hyperref[sec:probB]{One Light-Day Away (Spaceflight \& Distances)} & 5 Points & \pageref{sec:probB} \\[6pt]
+    \hyperref[sec:probC]{\textbf{Problem C}} & \hyperref[sec:probC]{When Betelgeuse Explodes (Stellar Magnitudes)} & 5 Points & \pageref{sec:probC} \\[6pt]
+    \hyperref[sec:probD]{\textbf{Problem D}} & \hyperref[sec:probD]{The Eclipse of the Century (Solar Eclipse Geometry)} & 5 Points & \pageref{sec:probD} \\[6pt]
+    \hyperref[sec:probE]{\textbf{Problem E}} & \hyperref[sec:probE]{The Red Moon (Lunar Eclipse \& Atmospheric Optics)} & 5 Points & \pageref{sec:probE} \\
+    \midrule
+    \textbf{Total} & \textbf{Qualification Round Complete Set} & \textbf{25 Points} & \\
+    \bottomrule
+\end{tabularx}
+
+\vspace{24pt}
+
+\noindent{\large\bfseries\color{navyaccent} Physical \& Astronomical Constants}\par
+\vspace{4pt}
+{\color{iaacrule}\hrule height 0.8pt}
+\vspace{8pt}
+
+\noindent\begin{tabularx}{\textwidth}{@{}lXl@{}}
+    \toprule
+    \textbf{Symbol} & \textbf{Constant Description} & \textbf{Value} \\
+    \midrule
+    $c$ & Speed of light in vacuum & $2.99792 \times 10^{5}\text{ km/s}$ \\
+    $1\text{ AU}$ & Astronomical Unit & $1.496 \times 10^{8}\text{ km}$ \\
+    $1\text{ ly}$ & Light-year ($365.25\text{ days}$) & $9.461 \times 10^{12}\text{ km}$ \\
+    $R_{\text{Moon}}$ & Mean radius of the Moon & $1{,}737\text{ km}$ \\
+    $R_{\text{Sun}}$ & Radius of the Sun & $695{,}700\text{ km}$ \\
+    $R_{\text{Earth}}$ & Mean radius of the Earth & $6{,}371\text{ km}$ \\
+    $T_{\text{sid}}$ & Sidereal rotation period of Earth & $23.93\text{ hours} = 86{,}148\text{ s}$ \\
+    \bottomrule
+\end{tabularx}
+
+% ==================== SOLUTIONS ====================
+\newpage
+
+% -------------------- PROBLEM A --------------------
+\phantomsection\label{sec:probA}
+\problemheader{Problem A: Moons of the Solar System}{5 Points}
+
+\questionbox{%
+    More than 400 moons orbit the planets and dwarf planets of the Solar System. Some are small captured rocks, others are larger than the planet Mercury, and a few hide oceans of liquid water under their surface. NASA's Europa Clipper and ESA's Juice are on their way to Jupiter to explore its icy moons.\\[4pt]
+    The images A to J show ten moons, photographed by space probes. Find the correct name for each of the moons A to J.\\[3pt]
+    \textbf{Names:} Callisto, Charon, Enceladus, Europa, Ganymede, Io, Mimas, Phobos, Titan, Triton.
+}
+
+% Visual schematic grid A-J matching the layout of the question paper
+\begin{center}
+\begin{tikzpicture}[x=3.28cm, y=2.35cm]
+    % Row 1: A - E
+    \foreach \idx/\lbl/\name/\col in {0/A/Enceladus/gray!18, 1/B/Io/yellow!65!orange, 2/C/Charon/gray!45, 3/D/Callisto/brown!45!black, 4/E/Titan/orange!55!yellow} {
+        \fill[iaacblack] (\idx, 1) rectangle (\idx+0.96, 1.94);
+        \node[fill=white, text=iaacblack, font=\bfseries\footnotesize, inner sep=2pt, anchor=north west] at (\idx+0.03, 1.91) {\lbl};
+        \fill[\col] (\idx+0.48, 1.50) circle (0.30);
+        \node[white, font=\bfseries\scriptsize] at (\idx+0.48, 1.12) {\name};
+    }
+    % Row 2: F - J
+    \foreach \idx/\lbl/\name/\col in {0/F/Phobos/brown!55!gray, 1/G/Triton/cyan!20!gray, 2/H/Ganymede/brown!35!gray, 3/I/Mimas/gray!55, 4/J/Europa/orange!20!white} {
+        \fill[iaacblack] (\idx, 0) rectangle (\idx+0.96, 0.94);
+        \node[fill=white, text=iaacblack, font=\bfseries\footnotesize, inner sep=2pt, anchor=north west] at (\idx+0.03, 0.91) {\lbl};
+        \fill[\col] (\idx+0.48, 0.50) circle (0.30);
+        \node[white, font=\bfseries\scriptsize] at (\idx+0.48, 0.12) {\name};
+    }
+\end{tikzpicture}
+\end{center}
+
+\gfsblock
+{Ten space-probe images (\textbf{A}--\textbf{J}) and ten Solar System moon names: Callisto, Charon, Enceladus, Europa, Ganymede, Io, Mimas, Phobos, Titan, Triton.}
+{Morphological and spectral identification based on surface albedo, crater density, tectonic fractures, volcanic activity, and atmospheric haze.}
+{Matching each image's diagnostic geological and atmospheric features to its respective Solar System moon:}
+
+\vspace{4pt}
+\noindent\begin{tabularx}{\textwidth}{@{}c l l X@{}}
+    \toprule
+    \textbf{ID} & \textbf{Moon} & \textbf{Parent} & \textbf{Key Diagnostic Visual Features} \\
+    \midrule
+    \textbf{A} & \textbf{Enceladus} & Saturn & Bright white water-ice crust; smooth south polar region with ``tiger stripe'' fractures. \\
+    \textbf{B} & \textbf{Io} & Jupiter & Yellow-orange sulfur-rich surface speckled with dark volcanic calderas. \\
+    \textbf{C} & \textbf{Charon} & Pluto & Greyish icy crust with reddish-brown north polar cap (Mordor Macula) and canyon. \\
+    \textbf{D} & \textbf{Callisto} & Jupiter & Ancient, dark, heavily cratered surface peppered with bright icy impact spots. \\
+    \textbf{E} & \textbf{Titan} & Saturn & Thick, opaque golden-orange nitrogen--methane atmospheric haze with limb brightening. \\
+    \textbf{F} & \textbf{Phobos} & Mars & Non-spherical, heavily cratered rocky body displaying the prominent Stickney crater. \\
+    \textbf{G} & \textbf{Triton} & Neptune & Pinkish nitrogen-ice south polar cap bordered by dimpled ``cantaloupe'' terrain. \\
+    \textbf{H} & \textbf{Ganymede} & Jupiter & Distinct dichotomy between dark cratered regions and lighter grooved tectonic bands. \\
+    \textbf{I} & \textbf{Mimas} & Saturn & Heavily cratered grey icy sphere dominated by the giant Herschel impact crater. \\
+    \textbf{J} & \textbf{Europa} & Jupiter & Smooth, bright water-ice shell crisscrossed by reddish-brown linear fractures (\textit{lineae}). \\
+    \bottomrule
+\end{tabularx}
+\vspace{6pt}
+
+\answerbox{Answer}{%
+    \textbf{A:} Enceladus \quad|\quad \textbf{B:} Io \quad|\quad \textbf{C:} Charon \quad|\quad \textbf{D:} Callisto \quad|\quad \textbf{E:} Titan\\[2pt]
+    \textbf{F:} Phobos \quad|\quad \textbf{G:} Triton \quad|\quad \textbf{H:} Ganymede \quad|\quad \textbf{I:} Mimas \quad|\quad \textbf{J:} Europa
+}
+
+\newpage
+
+% -------------------- PROBLEM B --------------------
+\phantomsection\label{sec:probB}
+\problemheader{Problem B: One Light-Day Away}{5 Points}
+
+\questionbox{%
+    On 18 November 2026, NASA's Voyager 1, launched in 1977, became the first spacecraft ever to reach a distance of one light-day from the Earth: a radio command sent from Earth now needs a whole day to reach it. Voyager 1 moves away from the Sun at about $17\text{ km/s}$.\\[6pt]
+    \textbf{(a)} How far is one light-day, in kilometres and in astronomical units ($1\text{ AU} = 1.496 \cdot 10^{8}\text{ km}$)?\\[4pt]
+    \textbf{(b)} Proxima Centauri, the nearest star to the Sun, is $4.24$ light-years away. How many years would Voyager 1 need to cover this distance at its current speed?
+}
+
+\subquestion{(a) Distance of one light-day in kilometres and astronomical units}
+\gfsblock
+{$t_{1\text{ d}} = 1\text{ day} = 24 \times 3600\text{ s} = 86{,}400\text{ s}$; \quad $c = 2.99792 \times 10^{5}\text{ km/s}$; \quad $1\text{ AU} = 1.496 \times 10^{8}\text{ km}$.}
+{$d = c \cdot t_{1\text{ d}}$ \quad and \quad $d_{\text{AU}} = \dfrac{d}{1\text{ AU}}$.}
+{In kilometres:
+\begin{align*}
+d &= (2.99792 \times 10^{5}\text{ km/s}) \times (86{,}400\text{ s}) \\
+  &\approx 2.590 \times 10^{10}\text{ km} \quad (2.592 \times 10^{10}\text{ km using } c = 3 \times 10^{5}\text{ km/s}).
+\end{align*}
+In astronomical units:
+\[
+d_{\text{AU}} = \frac{2.590 \times 10^{10}\text{ km}}{1.496 \times 10^{8}\text{ km/AU}} \approx 173.1\text{ AU} \quad (173.3\text{ AU}).
+\]}
+
+\subquestion{(b) Travel time of Voyager 1 to Proxima Centauri}
+\gfsblock
+{$d_{\text{Proxima}} = 4.24\text{ ly}$; \quad $v = 17\text{ km/s}$; \quad $1\text{ yr} = 365.25\text{ days} = 3.15576 \times 10^{7}\text{ s}$.}
+{$d_{\text{Proxima}} = 4.24 \times c \cdot (1\text{ yr})$ \quad and \quad $t = \dfrac{d_{\text{Proxima}}}{v}$.}
+{Converting $4.24\text{ light-years}$ into kilometres:
+\begin{align*}
+d_{\text{Proxima}} &= 4.24 \times (2.99792 \times 10^{5}\text{ km/s}) \times (3.15576 \times 10^{7}\text{ s}) \\
+                   &\approx 4.011 \times 10^{13}\text{ km}.
+\end{align*}
+Dividing by Voyager 1's speed $v = 17\text{ km/s}$:
+\begin{align*}
+t &= \frac{4.011 \times 10^{13}\text{ km}}{17\text{ km/s}} \approx 2.360 \times 10^{12}\text{ s} \\
+  &= \frac{2.360 \times 10^{12}\text{ s}}{3.15576 \times 10^{7}\text{ s/yr}} \approx 74{,}770\text{ years} \quad (\approx 75{,}000\text{ years}).
+\end{align*}}
+
+\answerbox{Answer}{%
+    \textbf{(a)} $d \approx \mathbf{2.590 \times 10^{10}\text{ km}} \approx \mathbf{173.1\text{ AU}}$ \qquad\qquad
+    \textbf{(b)} $t \approx \mathbf{74{,}770\text{ years}}$
+}
+
+\newpage
+
+% -------------------- PROBLEM C --------------------
+\phantomsection\label{sec:probC}
+\problemheader{Problem C: When Betelgeuse Explodes}{5 Points}
+
+\questionbox{%
+    Betelgeuse, the red supergiant in the shoulder of Orion, is near the end of its life and will probably explode as a supernova within the next $100{,}000$ years. It is about $168$ parsecs ($550$ light-years) away. At its brightest, a supernova of this type reaches an absolute magnitude of about $-17$.\\[6pt]
+    For comparison, Venus reaches an apparent magnitude of $-4.6$, the full Moon $-12.7$, and Sirius, the brightest star in the night sky, $-1.46$. An object of absolute magnitude $M$ at a distance $d$ has the apparent magnitude
+    \[
+    m = M + 5 \log_{10}\!\left(\frac{d}{10\text{ pc}}\right).
+    \]
+    \textbf{(a)} How bright will the supernova appear in our sky (apparent magnitude)?\\[4pt]
+    \textbf{(b)} How many times brighter than Venus, and how many times fainter than the full Moon, will it appear?\\[4pt]
+    \textbf{(c)} How far away would such a supernova have to be to appear only as bright as Sirius?
+}
+
+\subquestion{(a) Apparent magnitude of the Betelgeuse supernova}
+\gfsblock
+{$M = -17$; \quad $d = 168\text{ pc}$.}
+{$m = M + 5 \log_{10}\!\left(\dfrac{d}{10\text{ pc}}\right)$.}
+{Substituting $M = -17$ and $d = 168\text{ pc}$:
+\begin{align*}
+m &= -17 + 5 \log_{10}\!\left(\frac{168}{10}\right) = -17 + 5 \log_{10}(16.8) \\
+  &\approx -17 + 5(1.2253) \approx -10.87 \quad (\approx -10.9).
+\end{align*}}
+
+\subquestion{(b) Brightness relative to Venus and the full Moon}
+\gfsblock
+{$m_{\text{SN}} = -10.87$; \quad $m_{\text{Venus}} = -4.6$; \quad $m_{\text{Moon}} = -12.7$.}
+{Pogson's ratio: $\dfrac{F_1}{F_2} = 10^{0.4(m_2 - m_1)}$.}
+{\textbf{1. Relative to Venus:}
+\[
+\frac{F_{\text{SN}}}{F_{\text{Venus}}} = 10^{0.4(-4.6 - (-10.87))} = 10^{0.4(6.27)} = 10^{2.509} \approx 323\text{ times brighter}.
+\]
+\textbf{2. Relative to the full Moon:}
+\[
+\frac{F_{\text{Moon}}}{F_{\text{SN}}} = 10^{0.4(-10.87 - (-12.7))} = 10^{0.4(1.83)} = 10^{0.731} \approx 5.38\text{ times fainter}.
+\]}
+
+\subquestion{(c) Distance at which the supernova appears as bright as Sirius}
+\gfsblock
+{$m_{\text{Sirius}} = -1.46$; \quad $M = -17$.}
+{$d = 10\text{ pc} \times 10^{(m - M)/5}$.}
+{Setting $m = -1.46$ and solving for $d$:
+\begin{align*}
+d &= 10\text{ pc} \times 10^{(-1.46 - (-17))/5} = 10\text{ pc} \times 10^{15.54 / 5} \\
+  &= 10\text{ pc} \times 10^{3.108} \approx 12{,}800\text{ pc} \quad (\approx 41{,}800\text{ ly}).
+\end{align*}}
+
+\answerbox{Answer}{%
+    \textbf{(a)} $m \approx \mathbf{-10.87}$ \quad|\quad
+    \textbf{(b)} $\mathbf{323\times}$ brighter than Venus; $\mathbf{5.38\times}$ fainter than the full Moon \quad|\quad
+    \textbf{(c)} $d \approx \mathbf{12{,}800\text{ pc}}$ ($\approx 41{,}800\text{ ly}$)
+}
+
+\newpage
+
+% -------------------- PROBLEM D --------------------
+\phantomsection\label{sec:probD}
+\problemheader{Problem D: The Eclipse of the Century}{5 Points}
+
+\questionbox{%
+    On 2 August 2027, the Moon's shadow will sweep across North Africa and the Middle East. Near Luxor in Egypt, the Sun will be completely covered for $6$ minutes and $23$ seconds, one of the longest total solar eclipses of this century.\\[4pt]
+    At the moment of greatest eclipse near Luxor (latitude $25.7^{\circ}\text{ N}$), the Sun is almost overhead. The distance from the observer to the centre of the Moon is $351{,}000\text{ km}$, and to the centre of the Sun $151.8\text{ million km}$. Relative to the centre of the Earth, the Moon's shadow moves at $1.03\text{ km/s}$ in a direction $25^{\circ}$ south of east.\\[3pt]
+    \textit{Note:} radius of the Moon $1737\text{ km}$, radius of the Sun $695{,}700\text{ km}$, radius of the Earth $6371\text{ km}$; the Earth rotates once in $23.93\text{ hours}$.\\[12pt]
+    \textbf{(a)} Calculate the diameter of the Moon's full shadow (umbra) on the ground near Luxor.\\[12pt]
+    \textbf{(b)} Calculate how long totality lasts for an observer near Luxor, and compare with the predicted $6$ minutes and $23$ seconds.\\[12pt]
+    \textbf{(c)} Give two reasons why this eclipse is so long.
+}
+
+% Geometric diagram matching Page 3 of the question paper
+\begin{center}
+\begin{tikzpicture}[x=1cm, y=1cm]
+    \node[anchor=west, font=\footnotesize\color{iaacgray}] at (0, 2.2) {not to scale};
+
+    % Sun (left)
+    \shade[ball color=sunyellow] (1.3, 0.4) circle (1.15);
+    \node[below, font=\small\bfseries, text=navyaccent] at (1.3, -0.85) {Sun};
+
+    % Moon (middle)
+    \fill[navyaccent] (8.6, 0.4) circle (0.48);
+    \node[below, font=\small\bfseries, text=navyaccent] at (8.6, -0.18) {Moon};
+
+    % Umbra cone
+    \fill[navyaccent!15] (8.6, 0.88) -- (12.82, 0.51) -- (12.82, 0.29) -- (8.6, -0.08) -- cycle;
+
+    % Tangent rays from Sun edges through Moon edges to Earth
+    \draw[navyaccent!75, line width=0.6pt] (1.3, 1.55) -- (8.6, 0.88) -- (12.82, 0.51);
+    \draw[navyaccent!75, line width=0.6pt] (1.3, -0.75) -- (8.6, -0.08) -- (12.82, 0.29);
+
+    % Earth limb (right)
+    \begin{scope}
+        \clip (12.5, -1.4) rectangle (14.2, 2.2);
+        \fill[earthgreen] (15.8, 0.4) circle (3.0);
+        \draw[navyaccent, line width=0.7pt] (15.8, 0.4) circle (3.0);
+    \end{scope}
+    \node[below, font=\small\bfseries, text=navyaccent] at (13.5, -0.85) {Earth};
+
+    % Umbra highlight on Earth surface
+    \draw[goldaccent, line width=2.4pt] (12.81, 0.51) -- (12.81, 0.29);
+    \draw[goldaccent, line width=0.6pt] (12.85, 0.42) -- (13.35, 1.25) node[above, font=\footnotesize\bfseries, text=goldaccent] {umbra};
+
+    % Distance markers d_M and d_S
+    \draw[iaacgray, line width=0.6pt] (8.6, -0.45) -- (8.6, -0.72);
+    \draw[iaacgray, line width=0.6pt] (12.81, -0.45) -- (12.81, -0.72);
+    \draw[{Stealth[length=2mm]}-{Stealth[length=2mm]}, navyaccent, line width=0.7pt] (8.6, -0.58) -- (12.81, -0.58) node[midway, fill=white, inner sep=2pt, font=\footnotesize] {$d_{\text{M}}$};
+
+    \draw[iaacgray, line width=0.6pt] (1.3, -1.18) -- (1.3, -1.45);
+    \draw[iaacgray, line width=0.6pt] (12.81, -1.18) -- (12.81, -1.45);
+    \draw[{Stealth[length=2mm]}-{Stealth[length=2mm]}, navyaccent, line width=0.7pt] (1.3, -1.32) -- (12.81, -1.32) node[midway, fill=white, inner sep=2pt, font=\footnotesize] {$d_{\text{S}}$};
+\end{tikzpicture}
+\end{center}
+
+\subquestion{(a) Diameter of the Moon's umbra on the ground near Luxor}
+\gfsblock
+{$R_M = 1{,}737\text{ km}$; \quad $R_S = 695{,}700\text{ km}$; \quad $d_M = 3.51 \times 10^{5}\text{ km}$; \quad $d_S = 1.518 \times 10^{8}\text{ km}$.}
+{From similar triangles in the umbral shadow cone:
+\[
+\frac{R_M - r_u}{d_M} = \frac{R_S - r_u}{d_S} \implies r_u = \frac{R_M d_S - R_S d_M}{d_S - d_M}, \qquad D_u = 2 r_u.
+\]}
+{Substituting the given radii and distances to find the umbral radius $r_u$:
+\begin{align*}
+r_u &= \frac{(1{,}737\text{ km})(1.518 \times 10^{8}\text{ km}) - (695{,}700\text{ km})(3.51 \times 10^{5}\text{ km})}{1.518 \times 10^{8}\text{ km} - 3.51 \times 10^{5}\text{ km}} \\
+    &= \frac{2.6368 \times 10^{11} - 2.4419 \times 10^{11}}{1.5145 \times 10^{8}} = \frac{1.9486 \times 10^{10}}{1.5145 \times 10^{8}} \approx 128.66\text{ km}.
+\end{align*}
+Therefore, $D_u = 2 r_u = 2(128.66\text{ km}) \approx 257\text{ km}$.}
+
+\subquestion{(b) Duration of totality near Luxor and comparison}
+\gfsblock
+{$D_u = 257.3\text{ km}$; \quad $v_{\text{sh}} = 1.03\text{ km/s}$ ($25^{\circ}$ S of E); \quad $\phi = 25.7^{\circ}\text{ N}$; \quad $R_E = 6{,}371\text{ km}$; \quad $T_{\text{sid}} = 23.93\text{ h} = 86{,}148\text{ s}$.}
+{$v_{\text{rot}} = \dfrac{2\pi R_E \cos\phi}{T_{\text{sid}}}$ (due East); \quad $\vec{v}_{\text{rel}} = \vec{v}_{\text{sh}} - \vec{v}_{\text{rot}}$; \quad $t_{\text{tot}} = \dfrac{D_u}{|\vec{v}_{\text{rel}}|}$.}
+{First, calculate the eastward rotational speed of Earth's surface at Luxor's latitude:
+\[
+v_{\text{rot}} = \frac{2\pi (6{,}371\text{ km}) \cos(25.7^{\circ})}{86{,}148\text{ s}} \approx 0.4187\text{ km/s}.
+\]
+Resolving velocities into East ($+x$) and North ($+y$) components:
+\begin{align*}
+\vec{v}_{\text{sh}} &= (1.03\cos 25^{\circ},\; -1.03\sin 25^{\circ}) = (0.9335,\; -0.4353)\text{ km/s}, \\
+\vec{v}_{\text{rel}} &= (0.9335 - 0.4187,\; -0.4353) = (0.5148,\; -0.4353)\text{ km/s}.
+\end{align*}
+The magnitude of the shadow's speed relative to the ground is:
+\[
+v_{\text{rel}} = \sqrt{(0.5148)^2 + (-0.4353)^2} \approx 0.674\text{ km/s}.
+\]
+Thus, totality lasts:
+\[
+t_{\text{tot}} = \frac{257.3\text{ km}}{0.674\text{ km/s}} \approx 381.7\text{ s} = 6\text{ min } 22\text{ s}.
+\]
+This agrees with the predicted $6\text{ min } 23\text{ s}$ within $1\text{ s}$ (attributable to rounding and surface curvature).}
+
+\subquestion{(c) Two reasons why this eclipse is exceptionally long}
+\gfsblock
+{$d_M = 351{,}000\text{ km}$ (near lunar perigee), $d_S = 151.8\text{ million km}$ (near Earth aphelion), and latitude $\phi = 25.7^{\circ}\text{ N}$ near local noon.}
+{Angular size $\theta \propto \dfrac{R}{d}$ and relative ground speed $\vec{v}_{\text{rel}} = \vec{v}_{\text{sh}} - \vec{v}_{\text{rot}}$.}
+{\begin{enumerate}[leftmargin=1.4em, itemsep=2pt, topsep=1pt]
+    \item \textbf{Unusually wide umbra:} The Moon is near perigee ($d_M$ near minimum) while Earth is near aphelion ($d_S$ near maximum), making the Moon's angular diameter significantly larger than the Sun's and producing a wide umbral path ($\approx 257\text{ km}$).
+    \item \textbf{Slow relative ground speed:} Near local noon at low latitude ($25.7^{\circ}\text{ N}$), Earth's eastward rotation ($\approx 0.42\text{ km/s}$) tracks closely with the shadow's eastward motion, reducing $|\vec{v}_{\text{rel}}|$.
+\end{enumerate}}
+
+\answerbox{Answer}{%
+    \textbf{(a)} $D_u \approx \mathbf{257\text{ km}}$ \quad|\quad
+    \textbf{(b)} $t_{\text{tot}} \approx \mathbf{6\text{ min } 22\text{ s}}$ (matches $6\text{ min } 23\text{ s}$ within $1\text{ s}$) \quad|\quad
+    \textbf{(c)} Wide umbra (lunar perigee + solar aphelion) and low relative ground speed (co-directed tropical Earth rotation)
+}
+
+\newpage
+
+% -------------------- PROBLEM E --------------------
+\phantomsection\label{sec:probE}
+\problemheader{Problem E: The Red Moon}{5 Points}
+
+\questionbox{%
+    On 3 March 2026, a total lunar eclipse could be seen from East Asia, Australia, the Pacific and the Americas. For almost an hour, the Moon was completely inside the shadow of the Earth. Yet it did not disappear: it glowed in a dark copper red, as the photographs taken during the eclipse show.\\[4pt]
+    Explain why the Moon does not disappear completely during a total lunar eclipse, and why it turns red.
+}
+
+% Optical schematic of atmospheric refraction & Rayleigh scattering during a total lunar eclipse
+\begin{center}
+\begin{tikzpicture}[x=1cm, y=1cm]
+    % Sunlight rays from left
+    \draw[-{Stealth[length=2mm]}, sunyellow!85!orange, line width=1pt] (0.2, 1.35) -- (4.7, 1.35);
+    \draw[-{Stealth[length=2mm]}, sunyellow!85!orange, line width=1pt] (0.2, -1.35) -- (4.7, -1.35);
+    \draw[-{Stealth[length=2mm]}, sunyellow!85!orange, line width=1pt] (0.2, 0.55) -- (3.8, 0.55);
+    \draw[-{Stealth[length=2mm]}, sunyellow!85!orange, line width=1pt] (0.2, -0.55) -- (3.8, -0.55);
+    \node[above, font=\footnotesize\bfseries\color{navyaccent}] at (1.5, 1.4) {Incoming Sunlight};
+
+    % Earth's geometric umbra cone
+    \fill[navyaccent!12] (4.8, 1.15) -- (12.8, 0.45) -- (12.8, -0.45) -- (4.8, -1.15) -- cycle;
+    \draw[dashed, iaacgray, line width=0.6pt] (4.8, 1.15) -- (12.8, 0.45);
+    \draw[dashed, iaacgray, line width=0.6pt] (4.8, -1.15) -- (12.8, -0.45);
+    \node[font=\footnotesize\color{iaacgray}] at (8.8, 0.0) {Earth's Umbra};
+
+    % Earth + Atmosphere ring
+    \fill[cyan!25] (4.8, 0) circle (1.38);
+    \fill[earthgreen!80!blue] (4.8, 0) circle (1.15);
+    \draw[navyaccent, line width=0.7pt] (4.8, 0) circle (1.15);
+    \node[font=\small\bfseries\color{navyaccent}] at (4.8, 0) {Earth};
+    \node[above, font=\scriptsize\color{iaacgray}] at (4.8, 1.42) {Atmosphere};
+
+    % Refracted red light rays bending into umbra onto Moon
+    \draw[-{Stealth[length=2mm]}, bloodred, line width=1.1pt] (4.8, 1.28) -- (11.6, 0.12);
+    \draw[-{Stealth[length=2mm]}, bloodred, line width=1.1pt] (4.8, -1.28) -- (11.6, -0.12);
+    \node[above, font=\scriptsize\bfseries\color{bloodred}, rotate=-9.5] at (8.4, 0.72) {Refracted red light};
+
+    % Blue light scattered away
+    \draw[-{Stealth[length=1.8mm]}, blue!65, line width=0.7pt, dotted] (4.9, 1.28) -- (5.8, 1.95) node[right, font=\scriptsize\color{blue!70!black}] {Blue light scattered};
+    \draw[-{Stealth[length=1.8mm]}, blue!65, line width=0.7pt, dotted] (4.9, -1.28) -- (5.8, -1.95);
+
+    % Moon inside umbra
+    \shade[ball color=bloodred] (12.0, 0) circle (0.36);
+    \node[below, font=\small\bfseries\color{bloodred}] at (12.0, -0.45) {Red Moon};
+\end{tikzpicture}
+\end{center}
+
+\gfsblock
+{Total lunar eclipse configuration (the Moon lies completely within Earth's geometric umbra) and eclipse photographs showing the lunar disk glowing dark copper red during totality.}
+{Snell's law of refraction ($n_1 \sin\theta_1 = n_2 \sin\theta_2$) and Rayleigh scattering intensity ($I_{\text{scat}} \propto \lambda^{-4}$).}
+{\begin{enumerate}[leftmargin=1.4em, itemsep=4pt, topsep=2pt]
+    \item \textbf{Why the Moon does not disappear completely:} Although Earth's solid body blocks all direct sunlight from reaching the umbra, sunlight grazing the edge of Earth passes through Earth's atmosphere. Because the atmospheric refractive index decreases with altitude, this grazing sunlight undergoes \textbf{atmospheric refraction}, bending inward into Earth's shadow cone and illuminating the Moon even at mid-totality.
+    \item \textbf{Why the Moon turns copper red:} As sunlight traverses a long tangential path through the dense lower atmosphere, shorter wavelengths (violet and blue light) are strongly scattered out of the beam by air molecules via \textbf{Rayleigh scattering} ($I_{\text{scat}} \propto \lambda^{-4}$). Longer red and orange wavelengths penetrate the atmosphere with far less attenuation and are refracted onto the lunar surface---effectively bathing the Moon in the combined light of every simultaneous sunrise and sunset around Earth's limb.
+\end{enumerate}}
+
+\answerbox{Conclusion}{%
+    During totality, Earth's atmosphere refracts grazing sunlight inward into the umbra so the Moon remains visible, while Rayleigh scattering ($I_{\text{scat}} \propto \lambda^{-4}$) filters out blue light and transmits predominantly red-orange wavelengths, giving the Moon its characteristic copper-red glow.
+}
+
+\end{document}
